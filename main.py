@@ -13,5 +13,13 @@ if __name__ == '__main__':
             for row in soup.find_all('tr', { 'onmouseout': "fuera (this,'#FFFFFF');" }):
                 municipio = row.contents[3].text.replace('    ', '')
                 
-                format = f'({municipio}, {municipio}),\n'
+                municipio = municipio.replace('Á', 'A')
+                municipio = municipio.replace('É', 'E')
+                municipio = municipio.replace('Í', 'I')
+                municipio = municipio.replace('Ó', 'O')
+                municipio = municipio.replace('Ú', 'U')
+                
+                title = municipio.replace(' ', '_').upper()
+  
+                format = f"{title} = '{municipio}', _('{municipio}'),\n"
                 file.write(format)
